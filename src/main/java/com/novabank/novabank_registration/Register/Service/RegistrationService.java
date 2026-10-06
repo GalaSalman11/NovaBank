@@ -1,7 +1,7 @@
-package com.novabank.novabank_registration.Customer.Service;
+package com.novabank.novabank_registration.Register.Service;
 
-import com.novabank.novabank_registration.Customer.repository.CustomerRepository;
-import com.novabank.novabank_registration.Customer.repository.RolesRepository;
+import com.novabank.novabank_registration.repository.CustomerRepository;
+import com.novabank.novabank_registration.repository.RolesRepository;
 import com.novabank.novabank_registration.dto.RegistrationRequest;
 import com.novabank.novabank_registration.entity.Customer;
 import com.novabank.novabank_registration.entity.CustomerStatus;
@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -56,13 +54,15 @@ public class RegistrationService {
         customer.setPasswordHash(
                 passwordEncoder.encode(registration.password())
         );
-        customer.setStatus(CustomerStatus.PENDING_VERIFICATION);
+        customer.setStatus(CustomerStatus.PENDING);
+        customer.setPendingSince(Instant.now());
         customer.setCreatedBy("System");
 
-        Role customerRole = new Role();
-        customerRole.setName("CUSTOMER");
-
+        Role customerRole = roleRepository.findByName("CUSTOMER")
+                .orElseThrow(() -> new IllegalStateException("CUSTOMER role is not seeded"));
         customer.setRole(customerRole);
+
+
 
         return customer;
     }

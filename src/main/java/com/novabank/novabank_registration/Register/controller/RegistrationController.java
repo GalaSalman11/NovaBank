@@ -1,6 +1,6 @@
-package com.novabank.novabank_registration.Customer.controller;
+package com.novabank.novabank_registration.Register.controller;
 
-import com.novabank.novabank_registration.Customer.Service.RegistrationService;
+import com.novabank.novabank_registration.Register.Service.RegistrationService;
 import com.novabank.novabank_registration.dto.RegistrationRequest;
 import com.novabank.novabank_registration.dto.RegistrationResponse;
 import com.novabank.novabank_registration.entity.Customer;
@@ -34,11 +34,9 @@ public class RegistrationController {
     private RegistrationResponse toResponseDto(Customer customer) {
         return new RegistrationResponse(
                 customer.getId(),
-                customer.getFirstName(),
-                customer.getLastName(),
                 customer.getEmail(),
                 customer.getStatus(),
-                customer.getCreatedAt()
-        );
+                customer.getPendingSince(),
+                "Your registration is awaiting approval by a bank officer");
     }
 }

@@ -1,6 +1,6 @@
 package com.novabank.novabank_registration.config;
 
-import com.novabank.novabank_registration.Customer.repository.RolesRepository;
+import com.novabank.novabank_registration.repository.RolesRepository;
 import com.novabank.novabank_registration.entity.Role;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.novabank.novabank_registration.Customer.repository;
+package com.novabank.novabank_registration.repository;
 
 import com.novabank.novabank_registration.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

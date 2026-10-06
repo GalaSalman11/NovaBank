@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.*;
 
 
@@ -36,15 +37,21 @@ public class Customer extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS", nullable = false)
-    private CustomerStatus status =CustomerStatus.PENDING_VERIFICATION ;
+    private CustomerStatus status =CustomerStatus.PENDING ;
 
+    @Column(name = "PENDING_SINCE")
+    private Instant pendingSince;
 
+    @Column(name = "REVIEWED_BY")
+    private String reviewedBy;
 
-    @OneToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(name = "role_id", nullable = false, unique = true)
+    @Column(name = "REVIEWED_AT")
+    private Instant reviewedAt;
+
+    @Column(name = "REJECTION_REASON")
+    private String rejectionReason;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     }
